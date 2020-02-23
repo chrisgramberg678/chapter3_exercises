@@ -8,7 +8,7 @@ fn main() {
         println!("1) Convert Temperatures between Fahrenheit and Celsius");
         println!("2) Generate the nth Fibonacci number");
         println!("3) Print the lyrics to \"The Twelve Days of Christmas\"");
-        println!("Or type 0 to exit");
+        println!("Or type 0 to exit\n");
 
         let mut input = String::new();
 
@@ -16,27 +16,29 @@ fn main() {
             .read_line(&mut input)
             .expect("oh no, couldn't read your input :(");
 
-        let input: u32 = input.trim().parse().expect("That wasn't a number!");
+        let input: u32 = match input.trim().parse() {
+            Ok(num) => num,
+            Err(_) => 10,
+        };
 
         match input {
-        	1 => temperature_converter(),
-        	2 => fibonacci(),
-        	3 => twelve_days(),
-        	0 => break,
-        	_ => println!("that wasn't an option! Try again!"),
+            1 => temperature_converter(),
+            2 => fibonacci(),
+            3 => twelve_days(),
+            0 => break,
+            _ => println!("that wasn't an option! Try again!"),
         }
     }
 }
 
 fn temperature_converter() {
-	println!("not implemented yet!");
+    println!("not implemented yet!");
 }
 
 fn fibonacci() {
-	println!("not implemented yet!");
+    println!("not implemented yet!");
 }
 
-fn twelve_days(){
-	println!("not implemented yet!");
+fn twelve_days() {
+    println!("not implemented yet!");
 }
-
