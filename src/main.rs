@@ -32,7 +32,57 @@ fn main() {
 }
 
 fn temperature_converter() {
-    println!("not implemented yet!");
+    loop {
+        println!(
+            "Type a temperature and we'll convert it to the other standard for you: (XXC/XXF)"
+        );
+        println!("If you don't want to do this type 'exit' to return to the menu\n");
+
+        let mut input = String::new();
+        io::stdin()
+            .read_line(&mut input)
+            .expect("oh no, couldn't read your input :(");
+        input = input.trim().to_string();
+
+        if input == "exit" {
+            break;
+        }
+
+        let mut temp_scale = match input.pop() {
+            Some(scale) => scale,
+            None => continue,
+        };
+        temp_scale.make_ascii_lowercase();
+
+        let input: f32 = match input.parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("you didn't input a valid number! try again\n");
+                continue;
+            }
+        };
+
+        match temp_scale {
+            'f' => {
+                println!("That's {}{}", fahrenheit_to_celsius(input), 'C');
+            }
+            'c' => {
+                println!("That's {}{}", celsius_to_fahrenheit(input), 'F');
+            }
+            _ => {
+                println!("{} is not a valid temperature scale!", temp_scale);
+            }
+        };
+        println!("");
+    }
+}
+
+fn fahrenheit_to_celsius(val: f32) -> f32 {
+    return (val - 32.0) * (5.0 / 9.0);
+}
+
+fn celsius_to_fahrenheit(val: f32) -> f32 {
+    return val * (9.0 / 5.0) + 32.0;
 }
 
 fn fibonacci() {
